@@ -1,0 +1,49 @@
+﻿@page "/"
+@using FlightsData
+@code {
+    private List<Flight> flights = new List<Flight>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = new FlightServiceClient();
+        var response = await client.getAllFlightsAsync();
+        flights = response.@return.Select(f => new Flight
+        {
+            FlightNumber = f.flightNumber,
+            CityFrom = f.cityFrom,
+            CityTo = f.cityTo,
+            Day = f.day,
+            Time = f.time
+        }).ToList();
+    }
+}
+
+<PageTitle>System rezerwacji biletów lotniczych</PageTitle>
+<h1>System rezerwacji biletów lotniczych</h1>
+<Projekt_RSI_Klient.Components.Layout.SearchBox></Projekt_RSI_Klient.Components.Layout.SearchBox>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numer lotu</th>
+            <th>Miasto od</th>
+            <th>Miasto do</th>
+            <th>Dzień</th>
+            <th>Godzina</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in flights)
+        {
+            <tr>
+                <td>@flight.FlightNumber</td>
+                <td>@flight.CityFrom</td>
+                <td>@flight.CityTo</td>
+                <td>@flight.Day</td>
+                <td>@flight.Time</td>
+                <td><button>Kup bilet</button></td>
+            </tr>
+        }
+    </tbody>
+</table>

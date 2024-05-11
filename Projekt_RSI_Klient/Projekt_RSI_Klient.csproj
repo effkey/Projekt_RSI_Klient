@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Connected Services\Flights2\**" />
+    <Compile Remove="Connected Services\FlightsData\**" />
+    <Content Remove="Connected Services\Flights2\**" />
+    <Content Remove="Connected Services\FlightsData\**" />
+    <EmbeddedResource Remove="Connected Services\Flights2\**" />
+    <EmbeddedResource Remove="Connected Services\FlightsData\**" />
+    <None Remove="Connected Services\Flights2\**" />
+    <None Remove="Connected Services\FlightsData\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Connected Services\FlightsData\Reference.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="6.0.*" />
+  </ItemGroup>
+
+</Project>
