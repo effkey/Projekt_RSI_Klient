@@ -1,14 +1,19 @@
-﻿
+﻿@code {
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
 
-<input class="form-control" style="max-width:600px margin-top:10px" placeholder="Search..." />
-<button class="form-control" style="max-width:300px; margin-top:10px">
+    private string searchTerm;
+
+    private async Task PerformSearch()
+    {
+        if (OnSearch.HasDelegate)
+        {
+            await OnSearch.InvokeAsync(searchTerm);
+        }
+    }
+}
+
+<input class="form-control" style="max-width:600px; margin-top:10px" placeholder="Search..." @bind="searchTerm" />
+<button class="form-control btn btn-primary" style="max-width:300px; margin-top:10px" @onclick="PerformSearch">
     Search
 </button>
-
-
-
-
-
-@code {
-    
-}

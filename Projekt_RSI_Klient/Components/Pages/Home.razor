@@ -1,27 +1,18 @@
 ﻿@page "/"
-@using FlightsData
-@code {
-    private List<Flight> flights = new List<Flight>();
 
-    protected override async Task OnInitializedAsync()
-    {
-        var client = new FlightServiceClient();
-        var response = await client.getAllFlightsAsync();
-        flights = response.@return.Select(f => new Flight
-        {
-            FlightNumber = f.flightNumber,
-            CityFrom = f.cityFrom,
-            CityTo = f.cityTo,
-            Day = f.day,
-            Time = f.time
-        }).ToList();
-    }
-}
+@using FlightsData
+@using Components
+@using Projekt_RSI_Klient.Components.Layout
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
 
 <PageTitle>System rezerwacji biletów lotniczych</PageTitle>
 <h1>System rezerwacji biletów lotniczych</h1>
-<Projekt_RSI_Klient.Components.Layout.SearchBox></Projekt_RSI_Klient.Components.Layout.SearchBox>
+<SearchBox OnSearch="FilterFlights"></SearchBox>
 
+
+<ModalComponent IsVisible="isModalVisible" OnClose="CloseModal" SelectedFlight="selectedFlight"></ModalComponent>
 
 <table class="table">
     <thead>
@@ -31,10 +22,11 @@
             <th>Miasto do</th>
             <th>Dzień</th>
             <th>Godzina</th>
+            <th>Akcja</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var flight in flights)
+        @foreach (var flight in filteredFlights)
         {
             <tr>
                 <td>@flight.FlightNumber</td>
@@ -42,8 +34,66 @@
                 <td>@flight.CityTo</td>
                 <td>@flight.Day</td>
                 <td>@flight.Time</td>
-                <td><button>Kup bilet</button></td>
+                <td>
+                    <button class="btn btn-primary" @onclick="() => ShowFlightModal(flight)">Kup bilet</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
+
+@code {
+    private List<Flight> flights = new List<Flight>();
+    private List<Flight> filteredFlights = new List<Flight>();
+    private bool isModalVisible = false;
+    private Flight selectedFlight;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = new FlightServiceClient();
+        var response = await client.getAllFlightsAsync();
+        flights = response.@return.Select(f => new Flight
+            {
+                FlightNumber = f.flightNumber,
+                CityFrom = f.cityFrom,
+                CityTo = f.cityTo,
+                Day = f.day,
+                Time = f.time
+            }).ToList();
+        filteredFlights = flights; // Initially, show all flights
+    }
+
+    private void ShowModal()
+    {
+        isModalVisible = true;
+    }
+
+    private void CloseModal()
+    {
+        isModalVisible = false;
+    }
+
+    private void ShowFlightModal(Flight flight)
+    {
+        selectedFlight = flight;
+        ShowModal();
+    }
+
+    private void FilterFlights(string searchTerm)
+    {
+        if (string.IsNullOrEmpty(searchTerm))
+        {
+            filteredFlights = flights;
+        }
+        else
+        {
+            filteredFlights = flights.Where(f =>
+                f.FlightNumber.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                f.CityFrom.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                f.CityTo.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                f.Day.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                f.Time.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+            ).ToList();
+        }
+    }
+}

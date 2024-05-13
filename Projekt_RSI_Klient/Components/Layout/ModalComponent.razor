@@ -1,0 +1,70 @@
+﻿@code {
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [Parameter]
+    public Flight SelectedFlight { get; set; }
+
+    private PurchaseModel PurchaseFormModel { get; set; } = new PurchaseModel();
+
+    private async Task HandlePurchase()
+    {
+        // Handle the purchase transaction logic here
+        // You can access the form data from PurchaseFormModel
+        await OnClose.InvokeAsync();
+    }
+
+    private async Task CloseModal()
+    {
+        await OnClose.InvokeAsync();
+    }
+
+    public class PurchaseModel
+    {
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Email { get; set; }
+    }
+}
+
+<div class="modal @(IsVisible ? "show" : "")" style="display: @(IsVisible ? "block" : "none");">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Purchase Transaction</h5>
+                <button type="button" class="close" @onclick="CloseModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <strong>Flight Number:</strong> @SelectedFlight?.FlightNumber<br />
+                    <strong>City From:</strong> @SelectedFlight?.CityFrom<br />
+                    <strong>City To:</strong> @SelectedFlight?.CityTo<br />
+                    <strong>Day:</strong> @SelectedFlight?.Day<br />
+                    <strong>Time:</strong> @SelectedFlight?.Time<br />
+                </div>
+                <EditForm Model="PurchaseFormModel">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" @bind="PurchaseFormModel.Name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="surname">Surname</label>
+                        <input type="text" id="surname" class="form-control" @bind="PurchaseFormModel.Surname" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" @bind="PurchaseFormModel.Email" />
+                    </div>
+                </EditForm>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" @onclick="CloseModal">Close</button>
+                <button type="button" class="btn btn-primary" @onclick="HandlePurchase">Book</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop"></div>
+</div>
