@@ -7,14 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Connected Services\Flights2\**" />
-    <Compile Remove="Connected Services\FlightsData\**" />
-    <Content Remove="Connected Services\Flights2\**" />
-    <Content Remove="Connected Services\FlightsData\**" />
-    <EmbeddedResource Remove="Connected Services\Flights2\**" />
-    <EmbeddedResource Remove="Connected Services\FlightsData\**" />
-    <None Remove="Connected Services\Flights2\**" />
-    <None Remove="Connected Services\FlightsData\**" />
+    <Compile Remove="Connected Services\**" />
+    <Content Remove="Connected Services\**" />
+    <EmbeddedResource Remove="Connected Services\**" />
+    <None Remove="Connected Services\**" />
   </ItemGroup>
 
   <ItemGroup>

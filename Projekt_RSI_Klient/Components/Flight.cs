@@ -7,6 +7,7 @@
         public string CityTo { get; set; }
         public string Day { get; set; }
         public string Time { get; set; }
+        public bool Visible { get; set; }
     }
 
 }

@@ -1,4 +1,5 @@
-﻿@code {
+﻿@using FlightsData
+@code {
     [Parameter]
     public bool IsVisible { get; set; }
 
@@ -8,13 +9,25 @@
     [Parameter]
     public Flight SelectedFlight { get; set; }
 
+    [Parameter]
+    public EventCallback OnTicketPurchased { get; set; }
+
     private PurchaseModel PurchaseFormModel { get; set; } = new PurchaseModel();
 
     private async Task HandlePurchase()
     {
-        // Handle the purchase transaction logic here
-        // You can access the form data from PurchaseFormModel
-        await OnClose.InvokeAsync();
+        var client = new FlightServiceClient();
+        var response = await client.purchaseTicketAsync(PurchaseFormModel.Name, PurchaseFormModel.Email, PurchaseFormModel.Phone, SelectedFlight.FlightNumber);
+
+        if (response != null)
+        {
+            await OnTicketPurchased.InvokeAsync();
+            await OnClose.InvokeAsync();
+        }
+        else
+        {
+            // Handle error
+        }
     }
 
     private async Task CloseModal()
@@ -27,6 +40,7 @@
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
+        public string Phone { get; set; }
     }
 }
 
@@ -58,13 +72,127 @@
                         <label for="email">Email</label>
                         <input type="email" id="email" class="form-control" @bind="PurchaseFormModel.Email" />
                     </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" id="phone" class="form-control" @bind="PurchaseFormModel.Phone" />
+                    </div>
                 </EditForm>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" @onclick="CloseModal">Close</button>
-                <button type="button" class="btn btn-primary" @onclick="HandlePurchase">Book</button>
+                <button type="button" class="btn btn-primary" @onclick="HandlePurchase">Purchase</button>
             </div>
         </div>
     </div>
     <div class="modal-backdrop"></div>
 </div>
+
+<style>
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1050;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+        .modal.show {
+            display: block;
+        }
+
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 10% auto;
+        max-width: 500px;
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        border: 1px solid #999;
+        border-radius: 5px;
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem;
+    }
+
+    .modal-header {
+        border-bottom: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .modal-footer {
+        border-top: 1px solid #e5e5e5;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+    }
+
+    .modal-backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: #fff;
+        margin-right: 0.5rem;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>

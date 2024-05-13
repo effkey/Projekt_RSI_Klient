@@ -1,0 +1,37 @@
+﻿@page "/my-tickets"
+@using FlightsData
+@inject NavigationManager Navigation
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+<PageTitle>My Booked Flights</PageTitle>
+<h1>My Booked Flights</h1>
+<h2>twojastara123</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Flight Number</th>
+            <th>City From</th>
+            <th>City To</th>
+            <th>Day</th>
+            <th>Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in userTickets)
+        {
+            <tr>
+                <td>@ticket.FlightDetails.FlightNumber</td>
+                <td>@ticket.FlightDetails.CityFrom</td>
+                <td>@ticket.FlightDetails.CityTo</td>
+                <td>@ticket.FlightDetails.Day</td>
+                <td>@ticket.FlightDetails.Time</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+  
+}
+}

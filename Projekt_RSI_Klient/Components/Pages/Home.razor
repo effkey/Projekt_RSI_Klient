@@ -12,7 +12,8 @@
 <SearchBox OnSearch="FilterFlights"></SearchBox>
 
 
-<ModalComponent IsVisible="isModalVisible" OnClose="CloseModal" SelectedFlight="selectedFlight"></ModalComponent>
+
+<ModalComponent IsVisible="isModalVisible" OnClose="CloseModal" SelectedFlight="selectedFlight" OnTicketPurchased="RefreshFlights"></ModalComponent>
 
 <table class="table">
     <thead>
@@ -49,6 +50,11 @@
     private Flight selectedFlight;
 
     protected override async Task OnInitializedAsync()
+    {
+        await LoadFlights();
+    }
+
+    private async Task LoadFlights()
     {
         var client = new FlightServiceClient();
         var response = await client.getAllFlightsAsync();
@@ -95,5 +101,10 @@
                 f.Time.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
             ).ToList();
         }
+    }
+
+    private async Task RefreshFlights()
+    {
+        await LoadFlights();
     }
 }
