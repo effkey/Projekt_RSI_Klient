@@ -16,25 +16,25 @@ namespace FlightsData
     public interface FlightService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getAllFlightsRequest", ReplyAction="http://example.org/FlightService/getAllFlightsResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync(FlightsData.getAllFlightsRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/searchFlightsRequest", ReplyAction="http://example.org/FlightService/searchFlightsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<FlightsData.searchFlightsResponse> searchFlightsAsync(FlightsData.searchFlightsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getFlightByNumberRequest", ReplyAction="http://example.org/FlightService/getFlightByNumberResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getAllFlightsRequest", ReplyAction="http://example.org/FlightService/getAllFlightsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> getFlightByNumberAsync(FlightsData.getFlightByNumberRequest request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getUserTicketsRequest", ReplyAction="http://example.org/FlightService/getUserTicketsResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<FlightsData.getUserTicketsResponse> getUserTicketsAsync(FlightsData.getUserTicketsRequest request);
+        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync(FlightsData.getAllFlightsRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/purchaseTicketRequest", ReplyAction="http://example.org/FlightService/purchaseTicketResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<FlightsData.purchaseTicketResponse> purchaseTicketAsync(FlightsData.purchaseTicketRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getBookedFlightsByPassengerEmailRequest", ReplyAction="http://example.org/FlightService/getBookedFlightsByPassengerEmailResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getFlightByNumberRequest", ReplyAction="http://example.org/FlightService/getFlightByNumberResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> getFlightByNumberAsync(FlightsData.getFlightByNumberRequest request);
     }
     
     /// <remarks/>
@@ -216,39 +216,6 @@ namespace FlightsData
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlights", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getAllFlightsRequest
-    {
-        
-        public getAllFlightsRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlightsResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getAllFlightsResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public FlightsData.flight[] @return;
-        
-        public getAllFlightsResponse()
-        {
-        }
-        
-        public getAllFlightsResponse(FlightsData.flight[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="searchFlights", WrapperNamespace="http://example.org/", IsWrapped=true)]
     public partial class searchFlightsRequest
     {
@@ -301,82 +268,31 @@ namespace FlightsData
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getFlightByNumber", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getFlightByNumberRequest
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlights", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getAllFlightsRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        public getFlightByNumberRequest()
+        public getAllFlightsRequest()
         {
-        }
-        
-        public getFlightByNumberRequest(string arg0)
-        {
-            this.arg0 = arg0;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getFlightByNumberResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getFlightByNumberResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public FlightsData.flight @return;
-        
-        public getFlightByNumberResponse()
-        {
-        }
-        
-        public getFlightByNumberResponse(FlightsData.flight @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getUserTickets", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getUserTicketsRequest
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        public getUserTicketsRequest()
-        {
-        }
-        
-        public getUserTicketsRequest(string arg0)
-        {
-            this.arg0 = arg0;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getUserTicketsResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getUserTicketsResponse
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlightsResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getAllFlightsResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public FlightsData.ticket[] @return;
+        public FlightsData.flight[] @return;
         
-        public getUserTicketsResponse()
+        public getAllFlightsResponse()
         {
         }
         
-        public getUserTicketsResponse(FlightsData.ticket[] @return)
+        public getAllFlightsResponse(FlightsData.flight[] @return)
         {
             this.@return = @return;
         }
@@ -439,6 +355,90 @@ namespace FlightsData
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmail", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getBookedFlightsByPassengerEmailRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        public getBookedFlightsByPassengerEmailRequest()
+        {
+        }
+        
+        public getBookedFlightsByPassengerEmailRequest(string arg0)
+        {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmailResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getBookedFlightsByPassengerEmailResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public FlightsData.flight[] @return;
+        
+        public getBookedFlightsByPassengerEmailResponse()
+        {
+        }
+        
+        public getBookedFlightsByPassengerEmailResponse(FlightsData.flight[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getFlightByNumber", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getFlightByNumberRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        public getFlightByNumberRequest()
+        {
+        }
+        
+        public getFlightByNumberRequest(string arg0)
+        {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getFlightByNumberResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getFlightByNumberResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public FlightsData.flight @return;
+        
+        public getFlightByNumberResponse()
+        {
+        }
+        
+        public getFlightByNumberResponse(FlightsData.flight @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     public interface FlightServiceChannel : FlightsData.FlightService, System.ServiceModel.IClientChannel
     {
@@ -490,18 +490,6 @@ namespace FlightsData
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> FlightsData.FlightService.getAllFlightsAsync(FlightsData.getAllFlightsRequest request)
-        {
-            return base.Channel.getAllFlightsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync()
-        {
-            FlightsData.getAllFlightsRequest inValue = new FlightsData.getAllFlightsRequest();
-            return ((FlightsData.FlightService)(this)).getAllFlightsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<FlightsData.searchFlightsResponse> FlightsData.FlightService.searchFlightsAsync(FlightsData.searchFlightsRequest request)
         {
             return base.Channel.searchFlightsAsync(request);
@@ -517,29 +505,15 @@ namespace FlightsData
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> FlightsData.FlightService.getFlightByNumberAsync(FlightsData.getFlightByNumberRequest request)
+        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> FlightsData.FlightService.getAllFlightsAsync(FlightsData.getAllFlightsRequest request)
         {
-            return base.Channel.getFlightByNumberAsync(request);
+            return base.Channel.getAllFlightsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> getFlightByNumberAsync(string arg0)
+        public System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync()
         {
-            FlightsData.getFlightByNumberRequest inValue = new FlightsData.getFlightByNumberRequest();
-            inValue.arg0 = arg0;
-            return ((FlightsData.FlightService)(this)).getFlightByNumberAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<FlightsData.getUserTicketsResponse> FlightsData.FlightService.getUserTicketsAsync(FlightsData.getUserTicketsRequest request)
-        {
-            return base.Channel.getUserTicketsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<FlightsData.getUserTicketsResponse> getUserTicketsAsync(string arg0)
-        {
-            FlightsData.getUserTicketsRequest inValue = new FlightsData.getUserTicketsRequest();
-            inValue.arg0 = arg0;
-            return ((FlightsData.FlightService)(this)).getUserTicketsAsync(inValue);
+            FlightsData.getAllFlightsRequest inValue = new FlightsData.getAllFlightsRequest();
+            return ((FlightsData.FlightService)(this)).getAllFlightsAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -556,6 +530,32 @@ namespace FlightsData
             inValue.arg2 = arg2;
             inValue.arg3 = arg3;
             return ((FlightsData.FlightService)(this)).purchaseTicketAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> FlightsData.FlightService.getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request)
+        {
+            return base.Channel.getBookedFlightsByPassengerEmailAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(string arg0)
+        {
+            FlightsData.getBookedFlightsByPassengerEmailRequest inValue = new FlightsData.getBookedFlightsByPassengerEmailRequest();
+            inValue.arg0 = arg0;
+            return ((FlightsData.FlightService)(this)).getBookedFlightsByPassengerEmailAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> FlightsData.FlightService.getFlightByNumberAsync(FlightsData.getFlightByNumberRequest request)
+        {
+            return base.Channel.getFlightByNumberAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> getFlightByNumberAsync(string arg0)
+        {
+            FlightsData.getFlightByNumberRequest inValue = new FlightsData.getFlightByNumberRequest();
+            inValue.arg0 = arg0;
+            return ((FlightsData.FlightService)(this)).getFlightByNumberAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

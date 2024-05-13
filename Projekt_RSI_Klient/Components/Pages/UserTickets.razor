@@ -1,37 +1,98 @@
 ﻿@page "/my-tickets"
 @using FlightsData
-@inject NavigationManager Navigation
 @inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
 @rendermode InteractiveServer
+
 <PageTitle>My Booked Flights</PageTitle>
 <h1>My Booked Flights</h1>
-<h2>twojastara123</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Flight Number</th>
-            <th>City From</th>
-            <th>City To</th>
-            <th>Day</th>
-            <th>Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var ticket in userTickets)
-        {
+
+<div class="form-group">
+    <label for="email">Enter your email to see booked flights:</label>
+    <input type="email" id="email" class="form-control" @bind="userEmail" />
+</div>
+<button class="btn btn-primary" @onclick="LoadUserFlights">Get Booked Flights</button>
+
+@if (flightsLoaded)
+{
+    <table class="table" style="margin-top: 20px;">
+        <thead>
             <tr>
-                <td>@ticket.FlightDetails.FlightNumber</td>
-                <td>@ticket.FlightDetails.CityFrom</td>
-                <td>@ticket.FlightDetails.CityTo</td>
-                <td>@ticket.FlightDetails.Day</td>
-                <td>@ticket.FlightDetails.Time</td>
+                <th>Flight Number</th>
+                <th>City From</th>
+                <th>City To</th>
+                <th>Day</th>
+                <th>Time</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (userFlights.Any())
+            {
+                @foreach (var flight in userFlights)
+                {
+                    <tr>
+                        <td>@flight.flightNumber</td>
+                        <td>@flight.cityFrom</td>
+                        <td>@flight.cityTo</td>
+                        <td>@flight.day</td>
+                        <td>@flight.time</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5">No flights found for the provided email.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (loading)
+{
+    <p>Loading...</p>
+}
 
 @code {
+    private string userEmail;
+    private List<flight> userFlights = new List<flight>();
+    private bool flightsLoaded = false;
+    private bool loading = false;
 
-  
-}
+    private async Task LoadUserFlights()
+    {
+        if (string.IsNullOrWhiteSpace(userEmail))
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "Please enter a valid email.");
+            return;
+        }
+
+        try
+        {
+            loading = true;
+            flightsLoaded = false;
+            userFlights.Clear();
+
+            var client = new FlightServiceClient();
+            var response = await client.getBookedFlightsByPassengerEmailAsync(userEmail);
+
+            if (response?.@return != null)
+            {
+                userFlights = response.@return.ToList();
+                flightsLoaded = true;
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("alert", "No flights found for the provided email.");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"An error occurred: {ex.Message}");
+        }
+        finally
+        {
+            loading = false;
+        }
+    }
 }
