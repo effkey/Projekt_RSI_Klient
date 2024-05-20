@@ -20,21 +20,25 @@ namespace FlightsData
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<FlightsData.searchFlightsResponse> searchFlightsAsync(FlightsData.searchFlightsRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getAllFlightsRequest", ReplyAction="http://example.org/FlightService/getAllFlightsResponse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync(FlightsData.getAllFlightsRequest request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/purchaseTicketRequest", ReplyAction="http://example.org/FlightService/purchaseTicketResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<FlightsData.purchaseTicketResponse> purchaseTicketAsync(FlightsData.purchaseTicketRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getBookedFlightsByPassengerEmailRequest", ReplyAction="http://example.org/FlightService/getBookedFlightsByPassengerEmailResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getAllFlightsRequest", ReplyAction="http://example.org/FlightService/getAllFlightsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request);
+        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync(FlightsData.getAllFlightsRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getTicketPdfRequest", ReplyAction="http://example.org/FlightService/getTicketPdfResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<FlightsData.getTicketPdfResponse> getTicketPdfAsync(FlightsData.getTicketPdfRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getFlightByNumberRequest", ReplyAction="http://example.org/FlightService/getFlightByNumberResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.Threading.Tasks.Task<FlightsData.getFlightByNumberResponse> getFlightByNumberAsync(FlightsData.getFlightByNumberRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://example.org/FlightService/getBookedFlightsByPassengerEmailRequest", ReplyAction="http://example.org/FlightService/getBookedFlightsByPassengerEmailResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request);
     }
     
     /// <remarks/>
@@ -141,78 +145,6 @@ namespace FlightsData
         }
     }
     
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://example.org/")]
-    public partial class ticket
-    {
-        
-        private flight flightDetailsField;
-        
-        private string passengerEmailField;
-        
-        private string passengerNameField;
-        
-        private string passengerPhoneField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public flight flightDetails
-        {
-            get
-            {
-                return this.flightDetailsField;
-            }
-            set
-            {
-                this.flightDetailsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string passengerEmail
-        {
-            get
-            {
-                return this.passengerEmailField;
-            }
-            set
-            {
-                this.passengerEmailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string passengerName
-        {
-            get
-            {
-                return this.passengerNameField;
-            }
-            set
-            {
-                this.passengerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public string passengerPhone
-        {
-            get
-            {
-                return this.passengerPhoneField;
-            }
-            set
-            {
-                this.passengerPhoneField = value;
-            }
-        }
-    }
-    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -268,39 +200,6 @@ namespace FlightsData
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlights", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getAllFlightsRequest
-    {
-        
-        public getAllFlightsRequest()
-        {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlightsResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getAllFlightsResponse
-    {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public FlightsData.flight[] @return;
-        
-        public getAllFlightsResponse()
-        {
-        }
-        
-        public getAllFlightsResponse(FlightsData.flight[] @return)
-        {
-            this.@return = @return;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="purchaseTicket", WrapperNamespace="http://example.org/", IsWrapped=true)]
     public partial class purchaseTicketRequest
     {
@@ -342,14 +241,14 @@ namespace FlightsData
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public FlightsData.ticket @return;
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary", IsNullable=true)]
+        public byte[] @return;
         
         public purchaseTicketResponse()
         {
         }
         
-        public purchaseTicketResponse(FlightsData.ticket @return)
+        public purchaseTicketResponse(byte[] @return)
         {
             this.@return = @return;
         }
@@ -358,40 +257,78 @@ namespace FlightsData
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmail", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getBookedFlightsByPassengerEmailRequest
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlights", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getAllFlightsRequest
     {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string arg0;
-        
-        public getBookedFlightsByPassengerEmailRequest()
+        public getAllFlightsRequest()
         {
-        }
-        
-        public getBookedFlightsByPassengerEmailRequest(string arg0)
-        {
-            this.arg0 = arg0;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmailResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
-    public partial class getBookedFlightsByPassengerEmailResponse
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getAllFlightsResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getAllFlightsResponse
     {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public FlightsData.flight[] @return;
         
-        public getBookedFlightsByPassengerEmailResponse()
+        public getAllFlightsResponse()
         {
         }
         
-        public getBookedFlightsByPassengerEmailResponse(FlightsData.flight[] @return)
+        public getAllFlightsResponse(FlightsData.flight[] @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getTicketPdf", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getTicketPdfRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg1;
+        
+        public getTicketPdfRequest()
+        {
+        }
+        
+        public getTicketPdfRequest(string arg0, string arg1)
+        {
+            this.arg0 = arg0;
+            this.arg1 = arg1;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getTicketPdfResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getTicketPdfResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="base64Binary", IsNullable=true)]
+        public byte[] @return;
+        
+        public getTicketPdfResponse()
+        {
+        }
+        
+        public getTicketPdfResponse(byte[] @return)
         {
             this.@return = @return;
         }
@@ -434,6 +371,48 @@ namespace FlightsData
         }
         
         public getFlightByNumberResponse(FlightsData.flight @return)
+        {
+            this.@return = @return;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmail", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getBookedFlightsByPassengerEmailRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string arg0;
+        
+        public getBookedFlightsByPassengerEmailRequest()
+        {
+        }
+        
+        public getBookedFlightsByPassengerEmailRequest(string arg0)
+        {
+            this.arg0 = arg0;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="getBookedFlightsByPassengerEmailResponse", WrapperNamespace="http://example.org/", IsWrapped=true)]
+    public partial class getBookedFlightsByPassengerEmailResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://example.org/", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("return", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public FlightsData.flight[] @return;
+        
+        public getBookedFlightsByPassengerEmailResponse()
+        {
+        }
+        
+        public getBookedFlightsByPassengerEmailResponse(FlightsData.flight[] @return)
         {
             this.@return = @return;
         }
@@ -505,18 +484,6 @@ namespace FlightsData
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> FlightsData.FlightService.getAllFlightsAsync(FlightsData.getAllFlightsRequest request)
-        {
-            return base.Channel.getAllFlightsAsync(request);
-        }
-        
-        public System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync()
-        {
-            FlightsData.getAllFlightsRequest inValue = new FlightsData.getAllFlightsRequest();
-            return ((FlightsData.FlightService)(this)).getAllFlightsAsync(inValue);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.Threading.Tasks.Task<FlightsData.purchaseTicketResponse> FlightsData.FlightService.purchaseTicketAsync(FlightsData.purchaseTicketRequest request)
         {
             return base.Channel.purchaseTicketAsync(request);
@@ -533,16 +500,29 @@ namespace FlightsData
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> FlightsData.FlightService.getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request)
+        System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> FlightsData.FlightService.getAllFlightsAsync(FlightsData.getAllFlightsRequest request)
         {
-            return base.Channel.getBookedFlightsByPassengerEmailAsync(request);
+            return base.Channel.getAllFlightsAsync(request);
         }
         
-        public System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(string arg0)
+        public System.Threading.Tasks.Task<FlightsData.getAllFlightsResponse> getAllFlightsAsync()
         {
-            FlightsData.getBookedFlightsByPassengerEmailRequest inValue = new FlightsData.getBookedFlightsByPassengerEmailRequest();
+            FlightsData.getAllFlightsRequest inValue = new FlightsData.getAllFlightsRequest();
+            return ((FlightsData.FlightService)(this)).getAllFlightsAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<FlightsData.getTicketPdfResponse> FlightsData.FlightService.getTicketPdfAsync(FlightsData.getTicketPdfRequest request)
+        {
+            return base.Channel.getTicketPdfAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<FlightsData.getTicketPdfResponse> getTicketPdfAsync(string arg0, string arg1)
+        {
+            FlightsData.getTicketPdfRequest inValue = new FlightsData.getTicketPdfRequest();
             inValue.arg0 = arg0;
-            return ((FlightsData.FlightService)(this)).getBookedFlightsByPassengerEmailAsync(inValue);
+            inValue.arg1 = arg1;
+            return ((FlightsData.FlightService)(this)).getTicketPdfAsync(inValue);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -556,6 +536,19 @@ namespace FlightsData
             FlightsData.getFlightByNumberRequest inValue = new FlightsData.getFlightByNumberRequest();
             inValue.arg0 = arg0;
             return ((FlightsData.FlightService)(this)).getFlightByNumberAsync(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> FlightsData.FlightService.getBookedFlightsByPassengerEmailAsync(FlightsData.getBookedFlightsByPassengerEmailRequest request)
+        {
+            return base.Channel.getBookedFlightsByPassengerEmailAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<FlightsData.getBookedFlightsByPassengerEmailResponse> getBookedFlightsByPassengerEmailAsync(string arg0)
+        {
+            FlightsData.getBookedFlightsByPassengerEmailRequest inValue = new FlightsData.getBookedFlightsByPassengerEmailRequest();
+            inValue.arg0 = arg0;
+            return ((FlightsData.FlightService)(this)).getBookedFlightsByPassengerEmailAsync(inValue);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

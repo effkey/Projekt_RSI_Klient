@@ -23,6 +23,7 @@
                 <th>City To</th>
                 <th>Day</th>
                 <th>Time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -36,13 +37,16 @@
                         <td>@flight.cityTo</td>
                         <td>@flight.day</td>
                         <td>@flight.time</td>
+                        <td>
+                            <button class="btn btn-primary" @onclick="() => DownloadTicketPdf(flight.flightNumber)">Download PDF</button>
+                        </td>
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                    <td colspan="5">No flights found for the provided email.</td>
+                    <td colspan="6">No flights found for the provided email.</td>
                 </tr>
             }
         </tbody>
@@ -93,6 +97,31 @@ else if (loading)
         finally
         {
             loading = false;
+        }
+    }
+
+    private async Task DownloadTicketPdf(string flightNumber)
+    {
+        try
+        {
+            var client = new FlightServiceClient();
+            var response = await client.getTicketPdfAsync(userEmail, flightNumber);
+
+            if (response?.@return != null)
+            {
+                var pdfBytes = response.@return;
+                var fileName = $"ticket_{flightNumber}.pdf";
+
+                await JSRuntime.InvokeVoidAsync("saveAsFile", fileName, Convert.ToBase64String(pdfBytes));
+            }
+            else
+            {
+                await JSRuntime.InvokeVoidAsync("alert", "Failed to retrieve the ticket PDF.");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"An error occurred while downloading the PDF: {ex.Message}");
         }
     }
 }
